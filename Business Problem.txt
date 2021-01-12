@@ -1,0 +1,8 @@
+Big cities evolve very quickly, following economic perspectives, life style trends and political scenarios.
+Tradiotional similarities due to geographical proximity or historical connections may turn outdate.
+It would be interesting to build a machine learning approach to constantly update the similarity among big cities all around the world based on actual and update characteristics.
+
+Clustering big cities based on the kind of Entertainment services they offer, or on the ethnic cuisines mostly covered  by their restaurant, or other categories of FourSquare's venues which are supposed to reflect the mood of the city and the overall spirit you can find in it: this could be a valuable tool for people aiming to travel and who are looking for experiences and feelings they previously had visitng other cities.
+
+Such a tool can measure in almost real time how a city is changing, and this is something that conventional approaches like surveys and inventories cannot accomplish: surveys need to be planned, executed and published, and that's why they risk to be outdate before becoming effective.
+One of the most appealing properties of a machine learning approach based on FourSquare is the possibility to sense changes happening in the city, even if (I would say primarily) these are difficult to foresee and following patterns complex to understand.
