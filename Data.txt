@@ -1,0 +1,61 @@
+Foursquare APIs allow to get venues of countless cities all around the world. 
+Each venue is categorized in a very precise manner, allowing to use more than a thousand categories. Such a detailed categorization can be aggregated if required, since each venue's category belongs to a hierarchical structure made by several levels, the upmost of which is made by the following items:
+
+- Arts & Entertainment
+- College & University
+- Event
+- Food
+- Nightlife Spot
+- Outdoors & Recreation
+- Professional & Other Places
+- Residence
+- Shop & Service
+- Travel & Transport   
+
+Here is the strategy I intend to use.
+
+1. Cities inventory.
+I will be using simplemaps data (https://simplemaps.com/data/world-cities), public up-to-date database of the world's cities and towns, built it using authoritative sources such as the NGIA, US Geological Survey, US Census Bureau, and NASA.
+The basic (free) version of the database contains data of about 26 thouseand prominent cities (large, capitals etc.).
+From these database I will extract a subset of cities with medium-high population (2.5M+ habitants), which are supposedely more tagged on FourSquare and have a considerable amount of venues.
+I will exclude chinese cities, because they are much more populated than other cities in the world: keeping them in the dataset would increase too much the set or would exclude cities from other countries.
+Of each city reteined in the set I will keep only the name and the location (latirude and longitude).
+
+2. Categories aggregation
+The venues categories returned by FourSqyare APIs are even too much analytic, which would reflect in having many different categories with very low frequency each. I suppose it is much more meaningfull to aggregate categories in families, so to have more occurrencies in each family and have a lower segmentation due to broader categorization.
+For example, there are 265 categories related to 'Food'. To have a more meaningful segmentation, we will aggregate them to a higher level with only 21 items:
+
+- African Restaurant
+- American Restaurant
+- Asian Restaurant
+- Caribbean Restaurant
+- Dessert Shop
+- Eastern European Restaurant
+- French Restaurant
+- German Restaurant
+- Greek Restaurant
+- Hawaiian Restaurant
+- Indian Restaurant
+- Italian Restaurant
+- Jewish Restaurant
+- Latin American Restaurant
+- Mediterranean Restaurant
+- Mexican Restaurant
+- Middle Eastern Restaurant
+- Russian Restaurant
+- Spanish Restaurant
+- Turkish Restaurant
+- Ukrainian Restaurant
+
+3. FourSquare APIs venues
+3.1 I will get, from FourSquare APIs, the venues found in a given radius (around 500m, see the notebook for the actual implementation) from the center of each city selected at step 1. 
+The geographical limit around the center is because I assume that venues close to the center are most significantly representing the  spirit of the city, while all the cities get similar the more you step away from the center.
+3.2 The number of venues will be restricted to 100 venues per city because this is the limitation of the free of charge FourSquare license.
+3.3 Cities for which the returned number of venues is under a given threshold (about 40 venues per city, see the notebook for the actual implementation) will be dropped from the dataset, to ensure that venues number is big enough to meaningfully represent the city.
+
+4. Data manipulation
+4.1 The venues category returned by FourSquare APIs for each venue will be changed to its 2nd level parent, to avoid too much segmentation.
+4.2 I will apply one-hot encoding to the dataset, in order to have, for each city, the mean of the occurrence frequency of each category.
+
+
+
